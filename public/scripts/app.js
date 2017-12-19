@@ -33,6 +33,10 @@ var onRemoveAll = function onRemoveAll() {
 
 var appRoot = document.getElementById('app');
 
+//example
+// const numbers = [2012, 2016, 2017]
+//use map to display each in a p tag in an array of JSX
+
 var render = function render() {
     var template = React.createElement(
         'div',
@@ -65,16 +69,13 @@ var render = function render() {
         React.createElement(
             'ol',
             null,
-            React.createElement(
-                'li',
-                null,
-                'Item one'
-            ),
-            React.createElement(
-                'li',
-                null,
-                'Item two'
-            )
+            app.options.map(function (option) {
+                return React.createElement(
+                    'li',
+                    { key: option },
+                    option
+                );
+            })
         ),
         React.createElement(
             'form',
@@ -102,3 +103,8 @@ render();
 //CREATE A REMOVE ALL BUTTON WITH TETXT OF "REMOVE ALL"
 //ON CLICK HANDLER - WIPE OUT YOUR OPTIONS - COUNT SHOULD GO BACK TO ZERO AS WELL
 // ON CLICK -> WIPE THE ARRAY -> RENDER
+
+//RECAP
+//1. COVERED THE FACT THAT ARRAYS ARE SUPPORTED BY JSX
+//2. WE CAN ALSO HAVE AN ARRAY OF JSX INSIDE OF JSX, ALLOWS US TO RENDER DYNAMIC ELEMENTS, BASED OFF OF ARRAYS' LENGTH
+//3. REFACTOR THE RETURN STATEMENT ABOVE INTO ONE LINE (CAN ONLY DO SO WHEN RETURNING ONE ARGUMENT)
