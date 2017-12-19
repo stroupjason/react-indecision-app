@@ -1,62 +1,163 @@
 'use strict';
 
-console.log("works");
+//auto generated file w/ JSX
+//JSX - Javascript XML //javascript language extenstion
+console.log("Konchiwa, App.js is running!");
 
-// console.log("works, not");
-//
-//arguments object - no longer bound with arrow functions*******//
-var add = function add(a, b) {
-  console.log("These are the: " + arguments);
-  return a + b;
+//challenge
+// -> create app object title/subtitle
+// -> create a user title/subtitle in the template
+// render template
+
+//section 3 lecture 12
+// -> if statemetns
+// -> ternary operators
+// -> logical operators //only render subtitle and p tag if stubtitle exists - logical operators
+// -> render new p tage - if options.length > 0 "Here are your options" "No options"
+
+var app = {
+  title: 'Indecision App',
+  subtitle: 'Put your life in the hands of a computer!',
+  options: ['One', 'Two']
 };
-console.log(add(55, 1, 1001)); //returns 56 in the console
-//in the past you might of had to explicityly say what is passed in,
-//but you also had access to arguments regardless of what's passed in
-//the arguments list, this is what allows us to pass more arguments
-//outside the function (add a console.log and pass in arguments)
-//able to see this as an array in the console
 
-//refactor to es6
-// const subtract = (a, b) => {
-//   console.log(arguments);
-//   return a-b;
-// };
-// console.log(subtract(55, 1, 1001));
-//in this case now this throws an err - arguments is not defined. if you do
-//need arguments stick with es5
+var template = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    app.title
+  ),
+  app.subtitle && React.createElement(
+    'p',
+    null,
+    app.subtitle
+  ),
+  React.createElement(
+    'p',
+    null,
+    app.options.length > 0 ? 'Here are your options' : 'No options'
+  ),
+  React.createElement(
+    'ol',
+    null,
+    React.createElement(
+      'li',
+      null,
+      'Item one'
+    ),
+    React.createElement(
+      'li',
+      null,
+      'Item two'
+    )
+  )
+);
+
+var count = 0;
+var addOne = function addOne() {
+  console.log('addOne');
+};
+var minusOne = function minusOne() {
+  console.log('minusOne');
+};
+var reset = function reset() {
+  console.log('reset');
+};
+var templateTwo = React.createElement(
+  'div',
+  null,
+  React.createElement(
+    'h1',
+    null,
+    'Count: ',
+    count
+  ),
+  React.createElement(
+    'button',
+    { onClick: addOne },
+    '+1'
+  ),
+  React.createElement('br', null),
+  React.createElement(
+    'button',
+    { onClick: minusOne },
+    '-1'
+  ),
+  React.createElement('br', null),
+  React.createElement(
+    'button',
+    { onClick: reset },
+    'reset'
+  )
+);
+
+//*********************CHALLENGE**************************************
+//MAKE A BUTTON "-1" - SET UP minusOne function and register - log "minusOne"
+//Make reset button "reset" - set up reset function - log "reset"
 
 
-//**********this keyword - no longer bound***************//
+//or you can write the addOne function within the button attribute - not best practice
 
+// const templateTwo = (
+//     <div>
+//         <h1>Count: {count}</h1>
+//         <button onClick={() => {
+//             console.log('addOne, something here');
+//         }}>+1</button>
+//     </div>
+// );
+//prints the object to the console to debug in chrome
+//console.log(templateTwo);
+
+
+// //RENDER A COUNTER; MAKE SURE TO RENDER THE CORRECT TEMPLATE
+// let count = 0;
+// //set up a javascript expression passing in someId
+// const someId = 'myidhere'
+// //templateTwo is an object
+// const templateTwo = (
+//     <div>
+//         <h1>Count: {count}</h1>
+//         {/* //with JSX class attribute needs to be named className (error in console)
+//             can't use class becuase it's a reserved word in javascript
+//             make sure to check the docs - https://reactjs.org/docs/dom-elements.html*/}
+//         <button id={someId} className="button">+1</button>
+//     </div>
+//
+// );
+// //prints the object to the console to debug
+// console.log(templateTwo);
+
+
+//USED FOR THE BEGINNING OF THE VIDEOS:
 
 // const user = {
 //   name: 'Jason',
-//   cities: ['Fort Collins', 'Tokyo', 'Guantanamo Bay'],
-//   printPlacesLived: function () {
-//     this.cities.forEach(city => {
-//       console.log(this.name + ' has live in ' + city);
-//     });
-//   }
+//   age: 27,
+//   location: 'Denver'
 // };
-// user.printPlacesLived();
+//
+// function getLocation(location){
+//   //return 'Unknown';
+//   if (location) {
+//     return <p>Location: {location}</p>;
+//   }
+// }
+//
+// const templateTwo = (
+//   <div>
+//     <h1>{user.name ? user.name : 'Anonymous'}</h1>
+//     {(user.age >= 18) && <p>Age: {user.age}</p>}
+//     {getLocation(user.location)}
+//   </div>
+// );
 
-//if we want to use this we switch to es5, but now 10:15min - new sytanx to define
-//methods and definitions called method definition sytanx to clean the code up a litte bit
 
+var appRoot = document.getElementById('app');
 
-//*************now method definition sytanx***********//
-//remove everything before colon to arguments list
+//MAKE SURE TO RENDER THE CORRECT TEMPLATE
+//templateTwo renders to the screen
 
-const user = {
-  name: 'Jason',
-  cities: ['Fort Collins', 'Tokyo', 'Guantanamo Bay'],
-  printPlacesLived() {
-    this.cities.forEach(city => {
-      console.log(this.name + ' has live in ' + city);
-    });
-  }
-};
-user.printPlacesLived();
-//this method has all the same characteritics of the es5 function
-//if you want arguments you can type them into the printPlacesLived
-//access to your own this binding
+ReactDOM.render(templateTwo, appRoot);

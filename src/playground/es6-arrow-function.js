@@ -15,7 +15,8 @@ console.log(square(8)); //64 should print in chrome dev tools
 
 //arrow function expression sytanx (more concise functions)
 
-const sqaureArrow = (x) => x * x; //this only works if there's only 1 argument //return is implicitly returned
+const sqaureArrow = (x) => x * x; //this only works if there's only 1 argument
+//return is implicitly returned
   console.log(sqaureArrow(4)); //logs 16 in the console
 //if you have to wait on promises or other function calls, this is not ideal
 

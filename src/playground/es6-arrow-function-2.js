@@ -1,4 +1,4 @@
-console.log("works, not");
+console.log("working, not!");
 
 // console.log("works, not");
 //
@@ -31,12 +31,19 @@ const user = {
   name: 'Jason',
   cities: ['Fort Collins', 'Tokyo', 'Guantanamo Bay'],
   printPlacesLived() {
-    this.cities.forEach(city => {
-      console.log(this.name + ' has live in ' + city);
-    });
-  }
+      const cityMessages = this.cities.map((city) => {
+          //access this.name with map filtering so we can concatinate what we want to say
+          return this.name + ' has lived in ' + city + '!';
+      });
+      //no longer need forEach, we can just return the const cityMessages
+  //   this.cities.forEach(city => {
+  //     console.log(this.name + ' has lived in ' + city);
+  //   });
+  // }
+    return cityMessages;
+ }
 };
-user.printPlacesLived();
+console.log(user.printPlacesLived());
 //this method has all the same characteritics of the es5 function
 //if you want arguments you can type them into the printPlacesLived
 //access to your own this binding
@@ -45,3 +52,19 @@ user.printPlacesLived();
 //diff is that forEach lets you do something like print. with map it allows you to transform
 
 //map method
+
+//Challenge area *****************************************************
+
+const multiplier = {
+    //all 3 challenges below are called properties
+    //array of numbers (we want to multiply)
+    //multiplyBy - a single number
+    //define a method - multiply - return a new array where the number have been multiplied
+    numbers: [1,2,3],
+    multiplyBy: 3,
+    multiply() {
+        return this.numbers.map((number) => number * this.multiplyBy)
+        }
+};
+
+console.log(multiplier.multiply()); //example: [1,2,3] should return [2,4,6]
