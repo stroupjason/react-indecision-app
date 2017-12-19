@@ -4,17 +4,6 @@
 //JSX - Javascript XML //javascript language extenstion
 console.log("Konchiwa, App.js is running!");
 
-//challenge
-// -> create app object title/subtitle
-// -> create a user title/subtitle in the template
-// render template
-
-//section 3 lecture 12
-// -> if statemetns
-// -> ternary operators
-// -> logical operators //only render subtitle and p tag if stubtitle exists - logical operators
-// -> render new p tage - if options.length > 0 "Here are your options" "No options"
-
 var app = {
   title: 'Indecision App',
   subtitle: 'Put your life in the hands of a computer!',
@@ -57,107 +46,56 @@ var template = React.createElement(
 
 var count = 0;
 var addOne = function addOne() {
-  console.log('addOne');
+  //count = count+1;
+  count++;
+  renderCounterApp();
+  //this count changes the count number in the console.log but not the Count 0.
+  //JSX does not have data-binding
 };
 var minusOne = function minusOne() {
-  console.log('minusOne');
+  count--;
+  renderCounterApp();
 };
 var reset = function reset() {
-  console.log('reset');
+  count = 0;
+  renderCounterApp();
 };
-var templateTwo = React.createElement(
-  'div',
-  null,
-  React.createElement(
-    'h1',
-    null,
-    'Count: ',
-    count
-  ),
-  React.createElement(
-    'button',
-    { onClick: addOne },
-    '+1'
-  ),
-  React.createElement('br', null),
-  React.createElement(
-    'button',
-    { onClick: minusOne },
-    '-1'
-  ),
-  React.createElement('br', null),
-  React.createElement(
-    'button',
-    { onClick: reset },
-    'reset'
-  )
-);
-
-//*********************CHALLENGE**************************************
-//MAKE A BUTTON "-1" - SET UP minusOne function and register - log "minusOne"
-//Make reset button "reset" - set up reset function - log "reset"
-
-
-//or you can write the addOne function within the button attribute - not best practice
-
-// const templateTwo = (
-//     <div>
-//         <h1>Count: {count}</h1>
-//         <button onClick={() => {
-//             console.log('addOne, something here');
-//         }}>+1</button>
-//     </div>
-// );
-//prints the object to the console to debug in chrome
-//console.log(templateTwo);
-
-
-// //RENDER A COUNTER; MAKE SURE TO RENDER THE CORRECT TEMPLATE
-// let count = 0;
-// //set up a javascript expression passing in someId
-// const someId = 'myidhere'
-// //templateTwo is an object
-// const templateTwo = (
-//     <div>
-//         <h1>Count: {count}</h1>
-//         {/* //with JSX class attribute needs to be named className (error in console)
-//             can't use class becuase it's a reserved word in javascript
-//             make sure to check the docs - https://reactjs.org/docs/dom-elements.html*/}
-//         <button id={someId} className="button">+1</button>
-//     </div>
-//
-// );
-// //prints the object to the console to debug
-// console.log(templateTwo);
-
-
-//USED FOR THE BEGINNING OF THE VIDEOS:
-
-// const user = {
-//   name: 'Jason',
-//   age: 27,
-//   location: 'Denver'
-// };
-//
-// function getLocation(location){
-//   //return 'Unknown';
-//   if (location) {
-//     return <p>Location: {location}</p>;
-//   }
-// }
-//
-// const templateTwo = (
-//   <div>
-//     <h1>{user.name ? user.name : 'Anonymous'}</h1>
-//     {(user.age >= 18) && <p>Age: {user.age}</p>}
-//     {getLocation(user.location)}
-//   </div>
-// );
-
 
 var appRoot = document.getElementById('app');
 
-//MAKE SURE TO RENDER THE CORRECT TEMPLATE
-//templateTwo renders to the screen
+var renderCounterApp = function renderCounterApp() {
+  var templateTwo = React.createElement(
+    'div',
+    null,
+    React.createElement(
+      'h1',
+      null,
+      'Count: ',
+      count
+    ),
+    React.createElement(
+      'button',
+      { onClick: addOne },
+      '+1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: minusOne },
+      '-1'
+    ),
+    React.createElement(
+      'button',
+      { onClick: reset },
+      'reset'
+    )
+  );
 
-ReactDOM.render(templateTwo, appRoot);
+  //react is uses virtual dom algorithms in javascript to determine the minimal number of changes to
+  //that need to be made in order to correctly render the application
+  ReactDOM.render(templateTwo, appRoot);
+};
+//creating a function and calling it in a few seperate places, able to create a JSX app with
+//real time binding
+//this is essentially the start of react, we're going to write components to do so (scalable)
+
+renderCounterApp();
