@@ -30,6 +30,14 @@ var onRemoveAll = function onRemoveAll() {
     app.options = [];
     render();
 };
+//GENERATE RANDOM NUMBER, FIND THE OPTION THAT WAS SELECTED AND PRINT TO USER
+var onMakeDecision = function onMakeDecision() {
+    //genereate random number,
+    var randomNum = Math.floor(Math.random() * app.options.length);
+    //pull from options array:
+    var option = app.options[randomNum];
+    alert(option);
+};
 
 var appRoot = document.getElementById('app');
 
@@ -57,9 +65,9 @@ var render = function render() {
             app.options.length > 0 ? 'Here are your options' : 'No options'
         ),
         React.createElement(
-            'p',
-            null,
-            app.options.length
+            'button',
+            { disabled: app.options.length === 0, onClick: onMakeDecision },
+            'What should I do?'
         ),
         React.createElement(
             'button',
@@ -108,3 +116,11 @@ render();
 //1. COVERED THE FACT THAT ARRAYS ARE SUPPORTED BY JSX
 //2. WE CAN ALSO HAVE AN ARRAY OF JSX INSIDE OF JSX, ALLOWS US TO RENDER DYNAMIC ELEMENTS, BASED OFF OF ARRAYS' LENGTH
 //3. REFACTOR THE RETURN STATEMENT ABOVE INTO ONE LINE (CAN ONLY DO SO WHEN RETURNING ONE ARGUMENT)
+
+//RECAP FOR PICKING AN OPTION VIDEO 20:
+//1. fundamentals of jsx
+//2. build out a little applications
+//3. inject values, add conditional rendering, set up event handlers(form submits, button clicks), and generate dynamic set of
+//elements based off of application data, re-render and render the app keeping up  the UI up-to-date with the app fundamentals
+
+//up next, react components

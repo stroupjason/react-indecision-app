@@ -28,6 +28,14 @@ const onRemoveAll = () => {
     app.options = [];
     render();
 }
+//GENERATE RANDOM NUMBER, FIND THE OPTION THAT WAS SELECTED AND PRINT TO USER
+const onMakeDecision = () => {
+    //genereate random number,
+    const randomNum = Math.floor(Math.random() * app.options.length);
+    //pull from options array:
+    const option = app.options[randomNum];
+    alert(option);
+};
 
 const appRoot = document.getElementById('app');
 
@@ -41,7 +49,8 @@ const template = (
     <h1>{app.title}</h1>
     {app.subtitle && <p>{app.subtitle}</p>}
     <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
-    <p>{app.options.length}</p>
+    <button disabled={app.options.length === 0} onClick={onMakeDecision}>What should I do?</button>
+    {/* renders length of the array to the screen: <p>{app.options.length}</p> */}
     <button onClick={onRemoveAll}>Remove All</button>
     {
         //[13, 30 , 66, 'Jason Stroup', null, undefined, true]
@@ -91,3 +100,11 @@ render();
 //1. COVERED THE FACT THAT ARRAYS ARE SUPPORTED BY JSX
 //2. WE CAN ALSO HAVE AN ARRAY OF JSX INSIDE OF JSX, ALLOWS US TO RENDER DYNAMIC ELEMENTS, BASED OFF OF ARRAYS' LENGTH
 //3. REFACTOR THE RETURN STATEMENT ABOVE INTO ONE LINE (CAN ONLY DO SO WHEN RETURNING ONE ARGUMENT)
+
+//RECAP FOR PICKING AN OPTION VIDEO 20:
+//1. fundamentals of jsx
+//2. build out a little applications
+//3. inject values, add conditional rendering, set up event handlers(form submits, button clicks), and generate dynamic set of
+//elements based off of application data, re-render and render the app keeping up  the UI up-to-date with the app fundamentals
+
+//up next, react components
