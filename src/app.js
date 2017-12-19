@@ -5,58 +5,66 @@ console.log("Konchiwa, App.js is running!");
 const app = {
   title: 'Indecision App',
   subtitle: 'Put your life in the hands of a computer!',
-  options: ['One' , 'Two']
+  options: []
 };
 
+const onFormSubmit = (e) => {
+    //stops fullpage refresh to just handle the event when form is submitted
+    e.preventDefault();
+    //MAKE SURE FORM WORKS BELOW
+    // console.log('form submitted!')
+    const option = e.target.elements.option.value;
 
+    if(option) {
+        app.options.push(option);
+        e.target.elements.option.value = '';
+        render();
+    }
+};
+
+//CHALLENGE #2 (see instructions below)
+let count = 0;
+const onRemoveAll = () => {
+    app.options = [];
+    render();
+}
+
+const appRoot = document.getElementById('app');
+
+const render = () => {
 const template = (
   <div>
     <h1>{app.title}</h1>
     {app.subtitle && <p>{app.subtitle}</p>}
     <p>{app.options.length > 0 ? 'Here are your options' : 'No options'}</p>
+    <p>{app.options.length}</p>
+    <button onClick={onRemoveAll}>Remove All</button>
     <ol>
       <li>Item one</li>
       <li>Item two</li>
     </ol>
+    {/* no data was added to the url, we're creating single page applications so that
+    everything is handled in our client side Javascript */}
+    <form onSubmit={onFormSubmit}>
+        <input type="text" name="option"/>
+        <button>Add Option</button>
+    </form>
   </div>
 );
 
-let count = 0;
-const addOne = () => {
-    //count = count+1;
-    count++;
-    renderCounterApp();
-    //this count changes the count number in the console.log but not the Count 0.
-    //JSX does not have data-binding
- };
- const minusOne = () => {
-     count--;
-     renderCounterApp();
- }
- const reset = () => {
-     count = 0;
-     renderCounterApp();
- }
 
-const appRoot = document.getElementById('app');
-
-const renderCounterApp = () => {
-    const templateTwo = (
-         <div>
-            <h1>Count: {count}</h1>
-            <button onClick={addOne}>+1</button>
-            <button onClick={minusOne}>-1</button>
-            <button onClick={reset}>reset</button>
-         </div>
-     );
-
-     //react is uses virtual dom algorithms in javascript to determine the minimal number of changes to
-     //that need to be made in order to correctly render the application
-     ReactDOM.render(templateTwo, appRoot);
-
+ReactDOM.render(template, appRoot);
 };
-//creating a function and calling it in a few seperate places, able to create a JSX app with
-//real time binding
-//this is essentially the start of react, we're going to write components to do so (scalable)
 
-renderCounterApp();
+//******************************CHALLENGE 1***************************************
+//CREATE RENDER FUNCTION THAT RENDERS THE NEW JSX
+// CALL IT RIGHT AWAY
+// CALL IT RIGHT AFTER OPTIONS ARRAY ADDED TO
+
+render();
+
+
+//*******************************CHALLENGE 2 ************************************
+//CREATE A REMOVE ALL BUTTON WITH TETXT OF "REMOVE ALL"
+//ON CLICK HANDLER - WIPE OUT YOUR OPTIONS - COUNT SHOULD GO BACK TO ZERO AS WELL
+// ON CLICK -> WIPE THE ARRAY -> RENDER
